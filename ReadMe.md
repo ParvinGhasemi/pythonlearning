@@ -1,4 +1,4 @@
-#Why use OOP?
+# Why use OOP?
 Let's go through it with an example:
 A store management system that we develop and make it more complicated by every step!
 First: tracking the items we have in the store at the moment.
@@ -18,7 +18,7 @@ Static method should do some work for you that has some logical connections to a
 then this is a good candidate for creating a static method. because this has some connection to the class that we work with. So it makes sense to check if a price of an item has a decimal point and by saying has a decimal point, I count those out that are point zero.
 Static in class methods could look very alike to you. But we will explain the main differences
 
-# static methods vs class methods:
+## static methods vs class methods:
 When do we use a static method? a static method should do something that has a relationship with the class, but not something that must be unique per instance.
 
 when a class method? it's created for instantiating instances from some structured data that you own. it also should do something that has a relationship with the class,
