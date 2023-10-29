@@ -1,19 +1,36 @@
 #Now here we can only stantiate instances. This would be cleaner.
 from item import Item
-#Here we won't import phone, since we want to keep things simple.
+from phone import Phone
+from keyboard import Keyboard
 
-"""
-Item.instantiate_from_csv()
-print(Item.all)
-"""
+item10 = Item("MyItem", 750)
+# item1.name = "OtherItem"
+print(item10.name)
 
-# look at this example about overriding:
-item1 = Item("MyItem", 750)
-item1.name = "OtherItem"
-print(item1.name)
+# Encapsulation
+item10.apply_increment(0.2)
+print(item10.price) #900
+item10.apply_discount()
+print(item10.price) # 720
 
-# But what if we want to restrict the user to change the name attribute one it's been set up at initialization?
-# This is a good approach for critical attributes => we create read only attributes. means it can only be set once.
-# to declare a read only attribute, we use th @property decorator
-print(item1.read_only_name)
+# Abstraction
+item10 = Phone("jscPhone", 1000, 3)
 
+item10.send_email()
+
+# Inheritance
+item1 = Phone("jscPhone", 1000, 3)
+item1.send_email()
+
+# Polymorphism
+name = "Jim"
+print(len(name)) #length of the string (counting characters)
+some_list = ["some", "name"]
+print(len(some_list)) # length of the list (counting elements)
+# That's polymorphism in action, a single function does know
+# how to handle different kinds of objects as expected.
+
+# Another polymorphism in this project:
+item20 = Keyboard("jscKeyboard", 1000, 3)
+item20.apply_discount()
+print(item20.price) # 800

@@ -7,34 +7,39 @@ class Item:
   def __init__(self, name: str, price: float, quantity = 0):
     assert price >= 0, f"Price {price} for {name} should be greater than or equal to zaro."
     assert quantity >= 0, f"Quantity {quantity} for {name} should be greater than or equal to zero."
-    self._name = name
-    self.price = price
+    self.__name = name
+    self.__price = price
     self.quantity = quantity
     Item.all.append(self)
 
 
   @property
-  # Property Decorator => Read-only Attribute - only can be set once: at instanctiation
-  def name(self):
-    return self._name
-
-
-  def calculate_total_price(self):
-    return self.price * self.quantity
-
+  def price(self):
+    return self.__price
 
   def apply_discount(self):
-    self.price = self.price * self.pay_rate
+    self.__price = self.__price * self.pay_rate
+
+  def apply_increment(self, increment_value):
+    self.__price = self.__price * (1 + increment_value)
+
+  @property
+  def name(self):
+    return self.__name
+
+  @name.setter
+  def name(self, value):
+    if len(value) > 10:
+      raise Exception("The name is too long - it should be less than 10 characters.")
+    else:
+      self.__name = value 
+
+  def calculate_total_price(self):
+    return self.__price * self.quantity
 
 
-  # To read the data from CSV files, and instantiate the instances in a generic way
   @classmethod
-  def instantiate_from_csv(cls):
-  # In each method we design, we need to receive at least one parameter that will be passed as the instance itself.
-  # The problem here is we are not going to have any instances on our hand to call this method from the instance, 
-  # because this method is actually designed for instantiating the object itself. Therefore, this method can't be called from an instance.
-  # To solve this: convert this method to a class method. A class method is a method that could be accessed from the class level only. (Item.{methodName})
-  # Since it's a class method, then we use the decorator: @classmethod and instead of (self) we have: (cls) -> cls stands for class 
+  def instantiate_from_csv(cls): 
     with open('items.csv', 'r') as f: # Now we use a context manager to read the csv file, and since they're located in the same location we just say the filename and with persission'r' because we're just going to read this
       reader = csv.DictReader(f) # Converts it to a python dictionary and pass in the content of the file
       items = list(reader) # Converts it to a list
@@ -48,11 +53,6 @@ class Item:
         quantity = int(item.get('quantity')), # type: ignore
       )
 
-
-  # If you look after at the color of the received parameter ('self') below after typing @staticmethod, turned into a color that we're familiar with because that's like a regular parameter that wereceive.
-  # It means that the static methods are never sending (in the background) the instance as a first argument and that's unlike the class method.
-  # The class method sending the class reference as a first argument and that's why we had to receive the cls.
-  # But with static methods we never send the object as the first argument. that is why we should relate to the static method like a regular function that just receives parameters like we are familiar with isolated functions
   @staticmethod
   def is_integer(num):
     # We'll count out the decimals that are point zero; e.g. 5.0
@@ -68,4 +68,20 @@ class Item:
   def __repr__(self):
     return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
+  def __connect_to_smtp_server(self, smtp_server):
+    pass
+
+  def __prepare_email_body(self):
+    return f"""
+    Hello someone,
+    We have {self.name} {self.quantity} times.
+    """
+
+  def __send(self):
+    pass
   
+  def send_email(self):
+    self.__connect_to_smtp_server('')
+    self.__prepare_email_body()
+    self.__send()
+

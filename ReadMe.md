@@ -116,6 +116,26 @@ Here are some of the benefits of using properties:
 
 In general, it is a good practice to use properties instead of attributes whenever possible. This will make your code more robust and maintainable.
 
+# The 4 important key principles in OOP:
+OOP comes with 4 key principles that you should be aware of, to be able to design large applications, so that it's easier to maintain.
+
+## 1. Encapsulation
+Encapsulation refers to a mechanism of restricting the direct access of our attributes in a program. (like what we did in the example with name in the item class: restricting the ability to access and modify the name with some conditions)
+
+## 2. Abstraction
+It's a concept of OOP that only shows the necessary attributes and hides the unnecessary information. So it is basically hiding the unnecessary information from the user. (look at send_email method in the item.py).
+We set other methods as private and then have them all as part of the send_email(), which is public and can be accessed out of the class. This way, the unnecessary information has been hidden from the user. In python we make methods and attributes private by adding double underscores (__) before the name.
+
+
+## 3. Inheritance
+Inheritance is a mechanism that allows us to reuse code across our classes. like when we had the Phone class (the child class) to inherit from the Item class (parent class or super class). This means we can declare/set attributes and methods in the parent class, and inherit from that, so that we don't repeat the code in each child class.
+One important thing is that each parent class can have many child classes, but each child class can only have one parent class.
+
+
+## 4. Polymorphism
+Refers to a single type entity to represent different types in different scenarios. polymorphism literally means many forms; so applying it in programming is the ability to have different scenarios, when we call the exact same entity. An entity could be a function that we just call. It isn't something that is specifically applied to how you create your classes. Polymorphism is something that refers globally to your entire project. (To see examples, take a look at the polymorphism.py)
+
+
 **Source**:
 - [realpython](realpython.com/python-property/)
 - [freecodecamp.org](https://www.youtube.com/@freecodecamp)
